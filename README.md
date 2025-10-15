@@ -42,9 +42,9 @@ streamlit run app.py
 ```
 
 ## 参考
-・https://github.com/sunsmarterjie/yolov12?tab=readme-ov-file
-・https://colab.research.google.com/github/roboflow-ai/notebooks/blob/main/notebooks/train-yolov12-object-detection-model.ipynb#scrollTo=BFOfDnL_Ia8Y
-・https://zenn.dev/gj77a/articles/e5cd1056fcbdc4
-・https://docs.ultralytics.com/ja/models/yolo12/#overview
-・https://qiita.com/sypn/items/80962d84126be4092d3c
-・https://js2iiu.com/2025/05/20/streamlit-ui-tips/
+- https://github.com/sunsmarterjie/yolov12?tab=readme-ov-file
+- https://colab.research.google.com/github/roboflow-ai/notebooks/blob/main/notebooks/train-yolov12-object-detection-model.ipynb#scrollTo=BFOfDnL_Ia8Y
+- https://zenn.dev/gj77a/articles/e5cd1056fcbdc4
+- https://docs.ultralytics.com/ja/models/yolo12/#overview
+- https://qiita.com/sypn/items/80962d84126be4092d3c
+- https://js2iiu.com/2025/05/20/streamlit-ui-tips/
