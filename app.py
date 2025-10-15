@@ -30,7 +30,7 @@ if uploaded_file is not None:
     # Streamlitで表示する場合はRGBに変換
     uploaded_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     with col1:
-        st.image(uploaded_img, caption="アップロード画像", width='stretch')
+        st.image(uploaded_img, caption="アップロード画像", width=None)
 
     # 推論ボタン
     if st.button("推論開始"):
@@ -59,7 +59,7 @@ if uploaded_file is not None:
 
         # OpenCVにより、アノテーション画像をBGRからRGBに変換してStreamlitで表示
         with col2:
-            st.image(cv2.cvtColor(annotated_img, cv2.COLOR_BGR2RGB), caption="アノテーション画像", width='stretch')
+            st.image(cv2.cvtColor(annotated_img, cv2.COLOR_BGR2RGB), caption="アノテーション画像", width=None)
 
         st.divider()
         st.write("## 物体検出の予測精度")
