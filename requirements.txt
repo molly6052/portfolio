@@ -1,5 +1,0 @@
-streamlit==1.30.0
-numpy>=1.26.0
-opencv-python-headless
-pandas
-ultralytics
