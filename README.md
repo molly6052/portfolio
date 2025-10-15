@@ -2,7 +2,7 @@
 ロボットエンジニアを目指す未経験者のポートフォリオです。 学生時代の研究成果や、就業後に制作したプロジェクトをまとめています。
 
 **English:**
-This is a portfolio for someone who wants to become a robotics engineer. It shows projects from school and projects I made after starting work.
+This is a portfolio for someone who wants to become a robotics engineer. It showcases projects from my student research and projects I made after starting work.
 
 # 1.物体検出アプリ（YOLOv12）
 
@@ -24,13 +24,14 @@ This is a portfolio for someone who wants to become a robotics engineer. It show
 - アノテーション画像の表示
 - ラベルごとの予測精度の表示
 
-## 🚀 実行方法
+## 🚀 実行方法（ローカル環境）
 # 環境構築からアプリの起動まで一括で実行
 ```bash
-#下記を実行後、1を選択してサーバーを構築するか、または2を選択して実行
+# 下記を実行後、1を選択してサーバーを構築するか、または2を選択して実行
 sh ./setup.sh portfolio
 ```
 
 # アプリの起動(個別に)
 ```bash
+# Streamlitアプリを起動（ブラウザが自動で開きます）
 streamlit run app.py
