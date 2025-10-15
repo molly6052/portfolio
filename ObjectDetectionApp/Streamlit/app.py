@@ -10,10 +10,10 @@ model = YOLO("yolo12n.pt")
 st.markdown("<div style='text-align: center;'><h1>物体検出アプリ</h1></div>", unsafe_allow_html=True)
 
 st.divider()
-st.write("## アプリの概要")
+st.write("## ○アプリの概要")
 st.markdown("&emsp;本アプリは、YOLOv12を用いて画像内の物体を検出し、結果をWebブラウザ上に表示するアプリです。ロボットが環境を認識する視覚として開発しました。", unsafe_allow_html=True)
 st.divider()
-st.write("## 画像の準備")
+st.write("## ○画像の準備")
 st.write("")
 
 uploaded_file = st.file_uploader("画像ファイルをアップロードしてください。", type=["jpg", "jpeg", "png"])
@@ -62,7 +62,7 @@ if uploaded_file is not None:
             st.image(cv2.cvtColor(annotated_img, cv2.COLOR_BGR2RGB), caption="アノテーション画像", width=None)
 
         st.divider()
-        st.write("## 物体検出の予測精度")
+        st.write("## ○物体検出の予測精度")
         df = pd.DataFrame(labels, columns=["クラス名", "予測精度"]).set_index("クラス名")
 
         # Streamlit上に表示
