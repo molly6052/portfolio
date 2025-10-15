@@ -1,23 +1,5 @@
-# Webアプリフレームワーク
-streamlit==1.50.0
-
-# 数値計算・データ処理
-numpy==2.2.6
-pandas==2.3.3
-
-# 画像処理（GUIなし）
+streamlit==1.30.0
+numpy==1.26.0
+pandas==2.1.0
 opencv-python-headless==4.8.1.78
-Pillow==11.3.0
-
-# 可視化（オプション）
-matplotlib==3.10.7
-altair==5.5.0
-pydeck==0.9.1
-
-# YOLO / 深層学習
-torch==2.9.0
-torchvision==0.24.0
-ultralytics==8.3.214
-
-# その他依存関係
-requests==2.32.5
+ultralytics==8.0.184
