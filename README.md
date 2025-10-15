@@ -9,6 +9,10 @@ This is a portfolio for someone who wants to become a robotics engineer. It show
 ## ℹ️ アプリの概要
 本アプリは、YOLOv12を用いて画像内の物体を検出し、結果をWebブラウザ上に表示するアプリです。ロボットが環境を認識する視覚として開発しました。
 
+下記のリンクに本アプリを公開しています。
+
+https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
+
 **補足:**
 アップロードした画像は保存されません。
 
