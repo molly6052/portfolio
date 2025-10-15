@@ -17,10 +17,10 @@ https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
 アップロードした画像は保存されません。
 
 ## ⚙️ 使用技術
-- Python
-- Streamlit
-- OpenCV
-- Ultralytics YOLOv12
+- <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white">
+- <img src="https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white">
+- <img src="https://img.shields.io/badge/-OpenCV-3776AB?style=flat&logo=opencv&logoColor=white">
+- <img src="https://img.shields.io/badge/-YOLO-3776AB?style=flat&logo=yolo&logoColor=white">
 
 ## 🔄 機能
 - 画像ファイルのアップロード
@@ -39,3 +39,12 @@ sh ./setup.sh portfolio
 ```bash
 # Streamlitアプリを起動（ブラウザが自動で開きます）
 streamlit run app.py
+```
+
+## 参考
+・https://github.com/sunsmarterjie/yolov12?tab=readme-ov-file
+・https://colab.research.google.com/github/roboflow-ai/notebooks/blob/main/notebooks/train-yolov12-object-detection-model.ipynb#scrollTo=BFOfDnL_Ia8Y
+・https://zenn.dev/gj77a/articles/e5cd1056fcbdc4
+・https://docs.ultralytics.com/ja/models/yolo12/#overview
+・https://qiita.com/sypn/items/80962d84126be4092d3c
+・https://js2iiu.com/2025/05/20/streamlit-ui-tips/
