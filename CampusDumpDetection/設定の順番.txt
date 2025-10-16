@@ -1,0 +1,39 @@
+使用：　　　　　　　　　Raspberry pi3 modelB+
+インストール済みのOS：　Buster
+　ラズパイ３はBusuter　OS　が一番適している
+　bullseyeだと全ての機能に互換性があるわけではないので、動作が遅くなるなどの懸念がある
+
+目的：　　　　　　　　　libcamera moduleをpythonから用いるために、pycamera2ライブラリが必要なため、pycamera２をインストールできる環境を構築する
+
+python version管理：pyenv　https://zenn.dev/technicarium/articles/00b32d390e82ec
+　python3.7をインストール　Busterではpython3.7以下しかサポートされていない
+　　python3.7のinstall手順は、
+　　sudo apt-get update
+　　sudo apt-get upgrade
+　　
+　　依存パッケージをinstall
+　　sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+　　libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev \
+　　libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+　　
+
+pyhton 環境構築    ：pipenv　https://zenn.dev/technicarium/articles/ae2df596870246
+　規模の大きめの開発に向いているらしい
+
+コード　　　　　　　　：tensorflowlite のデモファイルを編集
+
+#追加ライブラリ　　　　：pycamera2　をインストール
+
+camera moduls　　　：libcamera auto foucs を繋げてみる
+
+
+参考サイト：
+https://forums.raspberrypi.com/viewtopic.php?t=323390
+https://forums.raspberrypi.com/viewtopic.php?t=328686
+https://www.google.com/search?q=how+to+set+arducam+16mp+with+raspberry+pi3+buster+os&oq=&aqs=chrome.2.69i59i450l8.74226j0j15&sourceid=chrome&ie=UTF-8
+https://github.com/Hexxeh/rpi-firmware/commits/master
+https://pimylifeup.com/raspberry-pi-tensorflow-lite/
+https://zenn.dev/technicarium/articles/00b32d390e82ec
+https://zenn.dev/technicarium/articles/ae2df596870246
+https://chat.openai.com/chat
+https://forum.arducam.com/t/using-libcamera-imx519-on-octopi/2272/2
