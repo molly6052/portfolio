@@ -30,7 +30,7 @@
 
 ## ○制作物ポートフォリオ 一覧
 #### [CampusDumpDetection](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/CampusDumpDetection)
-- **目的:**　校内の不法投棄をリアルタイム検出する簡易システム
+- **目的:** 校内の不法投棄をリアルタイム検出する簡易システム
 - **技術:** Python, OpenCV, Raspberry Pi, YOLOv8（物体検出）, 低照度画像強化
 - **役割** モデル選定・推論システムの実装
 - **成果** Raspberry Piでも軽量な物体検出モデルを活用し、リアルタイム処理を実現
