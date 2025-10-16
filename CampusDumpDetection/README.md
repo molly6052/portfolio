@@ -22,7 +22,7 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 - <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white">: 画像処理・通知スクリプト
 - <img src="https://img.shields.io/badge/-OpenCV-3776AB?style=flat&logo=opencv&logoColor=white">: カメラ制御・前処理
 - <img src="https://img.shields.io/badge/-TensorFlowLite-3776AB?style=flat&logo=tensorflowlite&logoColor=white">: 軽量物体検出
-- <img src="https://img.shields.io/badge/-YOLO-3776AB?style=flat&logo=yolo&logoColor=white">: 夜間人物検出
+- <img src="https://img.shields.io/badge/-YOLO-3776AB?style=flat&logo=yolo&logoColor=white">: 人物検出
 
 ## 🔄 システム機能
 1. **カメラで数秒毎に撮影**
@@ -65,12 +65,10 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 - プログラミング未経験の後輩にOJTで指導
 - 低コスト・短期間でプロトタイプを完成
 
----
+ **開発期間:** 2022年6月〜2023年3月  
+ **キーワード:** 不法投棄対策、AI監視、Raspberry Pi、物体検出、夜間検知  
 
-**開発期間:** 2022年6月〜2023年3月  
-**キーワード:** 不法投棄対策、AI監視、Raspberry Pi、物体検出、夜間検知  
-
-**参考文献**  
+## 参考
 - [Dual Illumination Estimation for Robust Exposure Correction](https://arxiv.org/pdf/1910.13688)  
 - [Python implementation of two low-light image enhancement techniques via illumination map estimation](https://github.com/pvnieo/Low-light-Image-Enhancement)  
 - [Linux ベースのデバイスで Python を使用するためのクイックスタートガイド](https://www.tensorflow.org/lite/guide/python?hl=ja#install_tensorflow_lite_for_python)
