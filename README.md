@@ -1,4 +1,4 @@
-# 盛 拓矢（もり たくや） - ロボットエンジニア志望ポートフォリオ
+## ○盛 拓矢（もり たくや） - ロボットエンジニア志望ポートフォリオ
 
 🌴 **徳之島出身** （鹿児島県奄美群島）
 琉球大学で機械工学を専攻し、大学院では機械学習・画像処理を用いた台風の3Dモデリングと測量の研究に取り組みました。  
@@ -7,7 +7,7 @@
 
 ---
 
-# ポートフォリオの概要
+## ○ポートフォリオの概要
 ロボットエンジニアを目指す未経験者として、自主的に取り組んだ制作物をまとめたポートフォリオです。  
 学生時代の研究と、就業後にアプリ・システムを紹介します。
 
@@ -16,7 +16,7 @@
 
 ---
 
-## スキル
+## ○スキル
 - **Programming:** Python, C++（基礎）
 - **ML / CV:** OpenCV, PyTorch, TensorFlow, YOLO, DeepLabCut, Picamera2
 - **Techniques:** Object Detection, Pose Estimation, Image Restoration, NeRF, Low-light Enhancement
@@ -25,7 +25,7 @@
 
 ---
 
-# 制作物ポートフォリオ 一覧
+## ○制作物ポートフォリオ 一覧
 ### [CampusDumpDetection](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/CampusDumpDetection)
 - **目的:**　校内の不法投棄をリアルタイム検出する簡易システム
 - **技術:** Python, OpenCV, Raspberry Pi, YOLOv8（物体検出）, 低照度画像強化
@@ -50,7 +50,7 @@
 
 ---
 
-## 連絡先
+### ○連絡先
 - 📍 Tokyo, Japan  
 - ✉️ mori301.ryukyu@gmail.com  
 - 🐙 [GitHub](https://github.com/molly6052)
