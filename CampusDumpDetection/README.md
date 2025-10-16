@@ -54,7 +54,7 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 ![通知画像](images/notify_img.jpg)
 
 **After**  
-![低照度強化画像](images/notify_img.jpg)
+![低照度強化画像](images/notify_img_DUAL_g0.8_l0.15.jpg)
 
 ## 成果・工夫
 - ヒアリングから設計・実装まで担当
