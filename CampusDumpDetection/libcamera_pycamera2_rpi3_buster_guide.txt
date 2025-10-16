@@ -1,3 +1,5 @@
+Raspberry pi4も同様の手順で環境構築可能
+
 使用：　　　　　　　　　Raspberry pi3 modelB+
 インストール済みのOS：　Buster
 　ラズパイ３はBusuter　OS　が一番適している
