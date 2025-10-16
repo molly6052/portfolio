@@ -12,7 +12,7 @@
 
 ## ○ポートフォリオの概要
 ロボットエンジニアを目指す未経験者として、自主的に取り組んだ制作物をまとめたポートフォリオです。  
-学生時代の研究と、就業後にアプリ・システムを紹介します。
+学生時代の研究と、就業後に作成したアプリを紹介します。
 
 - Pose Estimation（姿勢推定）、Object Detection（物体検出）、NeRF（Neural Radiance Field）
 - Python / OpenCV / PyTorch / Raspberry Pi などを活用
