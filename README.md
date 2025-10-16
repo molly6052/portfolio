@@ -43,6 +43,7 @@
 - **役割:** 推論アプリの開発・UI実装
 - **成果:** ブラウザ上で簡単に物体検出を体験可能
 
+体験はこちら → https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
 ---
 
 #### [SportsDSofJSS](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/SportsDSofJSS)
