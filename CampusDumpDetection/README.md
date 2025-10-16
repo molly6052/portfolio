@@ -49,6 +49,11 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 - 昼間は高精度に人物を認識
 - 少ないコスト（2万円弱）で基本的な、不法投棄防止システムのプロトタイプを構築
 
+<Before>
+![通知画像](CampusDumpDetection/images/notify_img.jpg)
+<after>
+![低照度強化画像](CampusDumpDetection/images/notify_img.jpg)
+
 ## 成果・工夫の強調
 - ヒアリングから設計・実装まで担当
 - 夜間でも検知できる低照度画像強化モデルを探索・適用
@@ -61,4 +66,4 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 ##### 参考
 - [Dual Illumination Estimation for Robust Exposure Correction](https://arxiv.org/pdf/1910.13688)
 - [Python implementation of two low-light image enhancement techniques via illumination map estimation](https://github.com/pvnieo/Low-light-Image-Enhancement)
-- [Linux ベースのデバイスで Python を使用するためのクイックスタートガイド]([https://docs.ultralytics.com/ja/models/yolo12/](https://www.tensorflow.org/lite/guide/python?hl=ja#install_tensorflow_lite_for_python))
+- [Linux ベースのデバイスで Python を使用するためのクイックスタートガイド](https://www.tensorflow.org/lite/guide/python?hl=ja#install_tensorflow_lite_for_python)
