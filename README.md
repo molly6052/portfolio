@@ -14,7 +14,7 @@
 ロボットエンジニアを目指す未経験者として、自主的に取り組んだ制作物をまとめたポートフォリオです。  
 
 学生時代の研究と、就業後に作成したアプリを紹介します。
-- Pose Estimation（姿勢推定）、Object Detection（物体検出）、NeRF（Neural Radiance Field）
+- 姿勢推定、物体検出、NeRF（Neural Radiance Field）
 - Python / OpenCV / PyTorch / Raspberry Pi などを活用
 
 ---
@@ -22,7 +22,7 @@
 ## ○スキル
 - **Programming:** Python, C++（基礎）
 - **ML / CV:** OpenCV, PyTorch, TensorFlow, YOLO, DeepLabCut, Picamera2
-- **Techniques:** Object Detection, Pose Estimation, Image Restoration, NeRF, Low-light Enhancement
+- **Techniques:** 物体検出, 姿勢推定, 行動認識, NeRF
 - **Hardware:** Raspberry Pi, Arduino Uno, 
 - **Others:** Git（基礎）, Streamlit
 
