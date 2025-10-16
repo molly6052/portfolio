@@ -36,6 +36,6 @@ streamlit run app.py
 ```
 
 ## 参考
-- https://github.com/sunsmarterjie/yolov12?tab=readme-ov-file
-- https://colab.research.google.com/github/roboflow-ai/notebooks/blob/main/notebooks/train-yolov12-object-detection-model.ipynb#scrollTo=BFOfDnL_Ia8Y
-- https://docs.ultralytics.com/ja/models/yolo12/#overview
+- [NeurIPS 2025: YOLOv12 – Attention-Centric Real-Time Object Detectors](https://github.com/sunsmarterjie/yolov12?tab=readme-ov-file)
+- [How to Train YOLOv12 Object Detection on a Custom Dataset](https://colab.research.google.com/github/roboflow-ai/notebooks/blob/main/notebooks/train-yolov12-object-detection-model.ipynb#scrollTo=BFOfDnL_Ia8Y)
+- [YOLO12：注意機構を中心とした物体検出](https://docs.ultralytics.com/ja/models/yolo12/)
