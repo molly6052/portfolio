@@ -19,14 +19,10 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 実証実験を2023年3月に行い、夜間でも人を正確に検知できることを確認した。
 
 ## ⚙️ 使用技術
-- <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white">
-- <img src="https://img.shields.io/badge/-OpenCV-3776AB?style=flat&logo=opencv&logoColor=white">
-- <img src="https://img.shields.io/badge/-YOLO-3776AB?style=flat&logo=yolo&logoColor=white">
-
-- Python: 画像処理・通知スクリプト
-- OpenCV: カメラ制御・前処理
-- TensorFlow Lite: 軽量物体検出
-- YOLOv8: 夜間人物検出
+- <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white">:画像処理・通知スクリプト
+- <img src="https://img.shields.io/badge/-OpenCV-3776AB?style=flat&logo=opencv&logoColor=white">:カメラ制御・前処理
+- <img src="https://img.shields.io/badge/-TensorFlowLite-3776AB?style=flat&logo=tensorflowlite&logoColor=white">:軽量物体検出
+- <img src="https://img.shields.io/badge/-YOLO-3776AB?style=flat&logo=yolo&logoColor=white">:夜間人物検出
 
 ## 🔄 機能
 1. **カメラで数秒毎に撮影**
