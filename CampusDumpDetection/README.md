@@ -53,11 +53,9 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 - 少ないコスト（2万円弱）で基本的な、不法投棄防止システムのプロトタイプを構築
 
 **＜画像比較＞**  
-**Before**  
-![通知画像](images/notify_img.jpg)
-
-**After**  
-![低照度強化画像](images/notify_img_DUAL_g0.8_l0.15.jpg)
+| Before | After |
+|--------|-------|
+| ![通知画像](images/notify_img.jpg) | ![低照度強化画像](images/notify_img_DUAL_g0.8_l0.15.jpg) |
 
 ## 成果・工夫
 - ヒアリングから設計・実装まで担当
