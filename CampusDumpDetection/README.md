@@ -12,7 +12,7 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 学内では異動の時期になると深夜・早朝に不法投棄が発生し、撤去に200万円以上の多額の費用がかかる問題があります。
 常時人員を配置するのは困難なため、赤外線カメラとAIによる自動検知・通知システムを開発しました。
 
-**概要図**
+**＜概要図＞**
 ![概要図](images/SystemView.jpg)
 
 **補足:**
@@ -49,16 +49,16 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 - 昼間は高精度に人物を認識
 - 少ないコスト（2万円弱）で基本的な、不法投棄防止システムのプロトタイプを構築
 
-##成果・工夫の強調
+## 成果・工夫の強調
 - ヒアリングから設計・実装まで担当
 - 夜間でも検知できる低照度画像強化モデルを探索・適用
 - プログラミング未経験の後輩にOJTで指導
 - 低コスト・短期間でプロトタイプを完成
 
-## 開発期間：2022年6月〜2023年3月
-## キーワード：不法投棄対策、AI監視、Raspberry Pi、物体検出、夜間検知
+##### 開発期間：2022年6月〜2023年3月
+##### キーワード：不法投棄対策、AI監視、Raspberry Pi、物体検出、夜間検知
 
-## 参考
+##### 参考
 - [Dual Illumination Estimation for Robust Exposure Correction](https://arxiv.org/pdf/1910.13688)
 - [Python implementation of two low-light image enhancement techniques via illumination map estimation](https://github.com/pvnieo/Low-light-Image-Enhancement)
 - [Linux ベースのデバイスで Python を使用するためのクイックスタートガイド]([https://docs.ultralytics.com/ja/models/yolo12/](https://www.tensorflow.org/lite/guide/python?hl=ja#install_tensorflow_lite_for_python))
