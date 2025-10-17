@@ -1,75 +1,146 @@
-# 柔道試合動画からの一本判定システム
+# ① 実際のコード構成に基づいたフォルダ構成案
 
-動画から選手の関節位置情報を抽出し、定量的に「一本」「技あり」「時間切れ」を分類することを目指しました。
+```
+judo-var-action-recognition/
+├── 00_docs/                               # 研究背景・発表資料
+│   └── スポコン_Judo_2023.pdf              # 学会提出PDF（背景・手法・結果の根拠）
+│
+├── 01_data_ops/                           # 元動画の整備系（切り出し・振り分け・編集）
+│   ├── 動画を範囲時間だけカットする.ipynb          # 試合終了3秒抽出などの時間トリミング
+│   ├── 動画向きで分ける.ipynb                     # 画角/向きで動画を自動分類
+│   └── 動画データセット編集など.ipynb のコピー      # データ整理（名称修正・コピー等のユーティリティ）
+│
+├── 02_inpainting_mask/                    # 審判除去（インペインティング）・選手領域抽出
+│   └── マスク切り抜き動画.ipynb                   # LangSAM→XMem→ProPainter等の前処理パイプ
+│
+├── 03_pose_estimation/                    # 姿勢推定（関節座標の抽出）
+│   └── COLAB_maDLC_TrainNetwork_VideoAnalysis.ipynb  # DeepLabCutによる推定/学習テンプレ
+│
+├── 04_skeleton_dataset/                   # 骨格データセットの作成・可視化
+│   ├── 学習データ作成.ipynb                      # CSV/フレーム準備・骨格データ整形
+│   └── pysklでmmactionの骨格座標を可視化.ipynb     # PySKLでの骨格可視化・検証
+│
+├── 05_training_eval/                      # 行動認識（MMAction2） 学習・評価・テスト
+│   ├── mmaction_skeleton_based_dataset作成_学習_テストも含む.ipynb
+│   │                                       # データセット→学習→推論まで一気通貫
+│   └── 柔道_学習_11月23日提出用.ipynb             # 最終提出向けトライアル（2/3クラス設定等）
+│
+├── 99_archive/                            # 参考・一時ファイル置き場（必要に応じて）
+│   └── README_作業メモ.md                       # 作業ログやローカル専用メモ（公開範囲に注意）
+│
+└── README.md                              # 本リポジトリのトップ説明（下記②を配置）
+```
 
-- **目的**: 柔道試合における VAR (Video Assistant Referee) システムの補助 をAIで実現
-- **特徴**: 姿勢推定＋行動認識モデルで動画から熟練の審判でないと判断が難しい内股一本の定量化を試みた
-- **成果**: 少ないデータでも、「内股一本か、内股技あり、時間切れ」の3クラス分類において63％という高精度で判定できた
+> 補足：
+>
+> * ノートブックは**改変せず**そのまま配置しています（要件順守）。
+> * 研究背景および手法（「審判除去 → 姿勢推定 → 行動認識」）は、PDFに記載の流れと一致させて階層化しています。 
 
-## ℹ️ システムの概要
-大学キャンパス内の不法投棄を検知するため、低コストで導入可能な監視システムを構築しました。
-Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含めた不法投棄の早期把握を目指しました。  
+---
 
-学内では異動の時期になると深夜・早朝に不法投棄が発生し、撤去に200万円以上の多額の費用がかかる問題があります。
-常時人員を配置するのは困難なため、赤外線カメラとAIによる自動検知・通知システムを開発しました。
+# ② README.md（貼り付け用）
 
-**＜システム実機＞**
-![システム実機](images/HeardWare.png)
+```markdown
+# Judo VAR Support: 一本/時間切れの行動認識パイプライン（非公開データ前提）
 
-**補足:**
-実証実験を2023年3月に行い、夜間でも人を正確に検知できることを確認しました。
+本リポジトリは、柔道試合動画の「試合終了直前3秒」から、**一本（内股）**か**時間切れ**かを簡易分類するまでの実験コード群を、当時の実装に基づいて整理・公開したものです。  
+※ コンペ提供データは**非公開**のため、**実行・再現は行いません**（ノートブックは**内容を変更せず**保存）。
 
-## ⚙️ 使用技術
-- <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white">: 画像処理・通知スクリプト
-- <img src="https://img.shields.io/badge/-OpenCV-3776AB?style=flat&logo=opencv&logoColor=white">: カメラ制御・前処理
-- <img src="https://img.shields.io/badge/-TensorFlowLite-3776AB?style=flat&logo=tensorflowlite&logoColor=white">: 軽量物体検出
-- <img src="https://img.shields.io/badge/-YOLO-3776AB?style=flat&logo=yolo&logoColor=white">: 人物検出
+---
 
-## 🔄 システム機能
-1. **カメラで数秒毎に撮影**
-2. **TensorFlow Lite による人物・ゴミ検知**
-   - 家具や家電などの対象物を検出
-3. **連続検知判定**
-   - 人物とゴミが数秒間連続して撮影された場合、画像を送信
-4. **低照度画像強化（夜間のみ）**
-   - 特定フォルダに画像があれば、自動で Python スクリプトを実行
-5. **YOLOv8 による人物検出（Linux サーバー上）**
-6. **LINE Notify 通知**
-   - 人物が検出された場合、守衛に通知
+## 背景・目的
+- VAR（Video Assistant Referee）の発想を柔道に適用し、**俯瞰視点で審判を補助**する仕組みを目指しました。  
+- 誤審の歴史的事例や、**選手の背中の付き方・速度・強さ**等の定性的基準を定量化する動機があります。  
+- 手法は **審判の映り込み除去 → 選手のみ抽出 → 姿勢推定（関節系列） → 行動認識** の流れです。  
+  （詳細は `00_docs/スポコン_Judo_2023.pdf` を参照）
+  
+---
 
-**＜概要図＞**
-![概要図](images/SystemView.jpg)
+## 全体フロー
 
-> **セキュリティ制約への対応**  
-> 学内のセキュリティ上、Raspberry Pi から直接サーバーへの画像送信は不可でした。  
-> そのため、まず関係者の LINE に通知を送信し、その後 Linux サーバーに画像を転送して低照度強化や人物検出の処理を実施しました。
+```
 
-## 担当
-- 制作・実装（学生）: 3名
-- 監修・指導（指導教員）: 1名
+[01_data_ops] 時間トリミング/向き振り分け/編集
+│
+▼
+[02_inpainting_mask] 審判除去（LangSAM→XMem→ProPainter）
+│
+▼
+[03_pose_estimation] DeepLabCutで関節座標抽出
+│
+▼
+[04_skeleton_dataset] 骨格データセット生成 & 可視化(PySKL)
+│
+▼
+[05_training_eval] MMAction2で学習・評価（2 or 3クラス）
 
-## 結果
-- 夜間でも人物の検知に成功（ノイズは多いが識別可能）
-- 昼間は高精度に人物を認識
-- 少ないコスト（2万円弱）で基本的な、不法投棄防止システムのプロトタイプを構築
+```
 
-**＜画像比較＞**  
-**Before**  
-![通知画像](images/notify_img.jpg)
+- 3秒＝**約73フレーム**を入力系列とし、内股一本 vs 時間切れの2クラス、または内股一本/技あり/時間切れの3クラスを分類。  
+- PDFの実験では、2クラスで **Acc ≈ 93.75%**（小規模実験）。今後は3クラス精度の改善が課題。  
+  *出典：`00_docs/スポコン_Judo_2023.pdf` 内の結果・考察を参照。*
 
-**After**  
-![低照度強化画像](images/notify_img_DUAL_g0.8_l0.15.jpg)
+---
 
-## 成果・工夫
-- ヒアリングから設計・実装まで担当
-- 夜間でも検知できる低照度画像強化モデルを探索・適用
-- プログラミング未経験の後輩にOJTで指導
-- 低コスト・短期間でプロトタイプを完成
+## ディレクトリと各スクリプトの役割・依存関係
 
- **開発期間:** 2022年6月〜2023年3月  
- **キーワード:** 不法投棄対策、AI監視、Raspberry Pi、物体検出、夜間検知  
+- `01_data_ops/`
+  - **動画を範囲時間だけカットする.ipynb**：終了時刻から3秒切り出しなど。
+  - **動画向きで分ける.ipynb**：画角/向き等で分類し、以降の処理を安定化。
+  - **動画データセット編集など.ipynb のコピー**：命名/整理のユーティリティ。
+- `02_inpainting_mask/`
+  - **マスク切り抜き動画.ipynb**：LangSAMで審判マスク生成 → XMemで追跡 → ProPainterで除去。
+- `03_pose_estimation/`
+  - **COLAB_maDLC_TrainNetwork_VideoAnalysis.ipynb**：DeepLabCutの学習/推定テンプレート（Colab前提）。
+- `04_skeleton_dataset/`
+  - **学習データ作成.ipynb**：CSVやフレームから骨格系列用データの準備。
+  - **pysklでmmactionの骨格座標を可視化.ipynb**：PySKLで骨格結果の可視化・デバッグ。
+- `05_training_eval/`
+  - **mmaction_skeleton_based_dataset作成_学習_テストも含む.ipynb**：MMAction2ベースのデータ作成→学習→推論。
+  - **柔道_学習_11月23日提出用.ipynb**：最終提出用の実験一式（2/3クラス設定の比較など）。
 
-## 参考
-- [Dual Illumination Estimation for Robust Exposure Correction](https://arxiv.org/pdf/1910.13688)  
-- [Python implementation of two low-light image enhancement techniques via illumination map estimation](https://github.com/pvnieo/Low-light-Image-Enhancement)  
-- [Linux ベースのデバイスで Python を使用するためのクイックスタートガイド](https://www.tensorflow.org/lite/guide/python?hl=ja#install_tensorflow_lite_for_python)
+**依存関係（概略）**  
+`01_data_ops` → `02_inpainting_mask` → `03_pose_estimation` → `04_skeleton_dataset` → `05_training_eval`
+
+---
+
+## 実行環境（参考・再現用メモ）
+
+> ※ 本リポジトリは**データ非公開かつ実行不要**です。以下は**参考**としての環境メモです。
+
+- OS: Google Colab / Linux 相当
+- Python: 3.9–3.10 目安
+- 主要ライブラリ
+  - OpenMMLab: `mmcv`, `mmengine`, `mmaction2`, `mmpose`, `mmdet`
+  - DeepLabCut 2.2+
+  - PyTorch (CUDA対応推奨だがCPUでも可。ただし推論/学習時間増)
+  - 画像/動画：`opencv-python`, `ffmpeg`
+  - 可視化/解析：`numpy`, `pandas`, `matplotlib`
+  - 前処理：LangSAM, XMem, ProPainter（研究用実装のため**セットアップが重い**点に注意）
+
+---
+
+## 再現に関する注意
+
+- コンペ提供データは**非公開**であり、本リポジトリに含めません。
+- **ノートブックの中身は一切変更していません**（`/content/drive/...` 等のパスや `!pip install` を含むセルは当時のまま残しています）。
+- 実行を試みる場合は、以下に留意してください（推奨はしません）:
+  - Google Drive/Colab 固有パスを**自環境に合わせて変更**。
+  - `!pip install` は**バージョンピン止め**や**仮想環境**を推奨。
+  - CUDAが無い環境では**GPU依存コード**（`.to("cuda")`など）を**CPUへ置換**が必要。
+
+---
+
+## 今後の改善点（ロードマップ）
+
+- [ ] **パス依存の解消**：環境変数/設定ファイル化（例：`config/env.yaml`）
+- [ ] **環境構築の自動化**：`requirements.txt` / `environment.yml` / `Dockerfile`
+- [ ] **学習スクリプトの分離**：`src/`に共通関数を切り出し、ノートは実行ドキュメントへ
+- [ ] **3クラス分類の精度改善**：データ拡張、画角の多様化、骨格以外の特徴融合
+- [ ] **推論用スクリプト**：学習済み重みがある場合の**バッチ推論CLI**の整備
+
+---
+
+## 引用
+- 研究背景・手法・結果の詳細は `00_docs/スポコン_Judo_2023.pdf` を参照してください。  
+```
