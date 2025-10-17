@@ -8,7 +8,7 @@
 https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
 
 **補足:**
-アップロードした画像は保存されません。
+> アップロードした画像は保存されません。
 
 ## ⚙️ 使用技術
 - <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white">
