@@ -23,13 +23,13 @@ https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
 - ラベルごとの予測精度の表示
 
 ## ○ 実行方法（ローカル環境）
-# 環境構築からアプリの起動まで一括で実行
+### 環境構築からアプリの起動まで一括で実行
 ```bash
 # 下記を実行後、1を選択してサーバーを構築するか、または2を選択して実行
 sh ./setup.sh portfolio
 ```
 
-# アプリの起動(個別に)
+### アプリの起動(個別に)
 ```bash
 # Streamlitアプリを起動（ブラウザが自動で開きます）
 streamlit run app.py
