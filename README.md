@@ -1,4 +1,4 @@
-## ○ロボットエンジニア志望ポートフォリオ
+## ○ ロボットエンジニア志望ポートフォリオ
 
 盛 拓矢（もり たくや）と言います！
 
@@ -19,7 +19,7 @@
 
 ---
 
-## ○スキル
+## ○ スキル
 - **Programming:** Python, C++（基礎）
 - **ML / CV:** OpenCV, PyTorch, TensorFlow, YOLO, DeepLabCut, Picamera2
 - **Techniques:** 物体検出, 姿勢推定, 行動認識, NeRF
@@ -28,7 +28,7 @@
 
 ---
 
-## ○制作物ポートフォリオ 一覧
+## ○ 制作物ポートフォリオ 一覧
 #### [校内の不法投棄をリアルタイム検出する簡易システム](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/CampusDumpDetection)
 - **技術:** Python, OpenCV, Raspberry Pi, YOLOv8（物体検出）, 低照度画像強化
 - **役割** モデル選定・推論システムの実装
@@ -51,7 +51,7 @@
 
 ---
 
-### ○連絡先
+### ○ 連絡先
 - 📍 Tokyo, Japan  
 - ✉️ mori301.ryukyu@gmail.com  
 - 🐙 [GitHub](https://github.com/molly6052)
