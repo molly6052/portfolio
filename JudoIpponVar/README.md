@@ -55,7 +55,7 @@
 | <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixTwoClass.png" width="300"> | <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixThreeClass.png" width="360"> |
 
 > - 3秒＝**約73フレーム**を入力系列とし、内股一本 vs 時間切れの2クラス、または内股一本/技あり/時間切れの3クラスを分類。
-> - PDFの説明では、2クラスで **正答率 ≈ 93.75%**（32の動画でテスト）。今後は3クラス精度の改善が課題。  
+> - 2クラスで **正答率 ≈ 93.75%**（32の動画でテスト）。今後は3クラス精度の改善が課題。  
 
 ## ○ 実行環境（参考メモ）
 
