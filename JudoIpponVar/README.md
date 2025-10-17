@@ -36,7 +36,7 @@
 
 ---
 
-![手順](images/)
+![手順](images/PreprocessingFlow.png)
 
 
 ---
