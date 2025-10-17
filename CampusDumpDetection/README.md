@@ -5,7 +5,7 @@
 - **特徴**: Raspberry Pi + 赤外線カメラ + AI による自動通知
 - **成果**: 夜間でも人物を正確に検知、低コストでプロトタイプ完成
 
-## ℹ️ システムの概要
+## ◯ システムの概要
 大学キャンパス内の不法投棄を検知するため、低コストで導入可能な監視システムを構築しました。
 Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含めた不法投棄の早期把握を目指しました。  
 
@@ -18,13 +18,13 @@ Raspberry Pi と赤外線カメラを用いて人物を検知し、夜間を含�
 **補足:**
 実証実験を2023年3月に行い、夜間でも人を正確に検知できることを確認しました。
 
-## ⚙️ 使用技術
+## ◯ 使用技術
 - <img src="https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white">: 画像処理・通知スクリプト
 - <img src="https://img.shields.io/badge/-OpenCV-3776AB?style=flat&logo=opencv&logoColor=white">: カメラ制御・前処理
 - <img src="https://img.shields.io/badge/-TensorFlowLite-3776AB?style=flat&logo=tensorflowlite&logoColor=white">: 軽量物体検出
 - <img src="https://img.shields.io/badge/-YOLO-3776AB?style=flat&logo=yolo&logoColor=white">: 人物検出
 
-## 🔄 システム機能
+## ◯ システム機能
 1. **カメラで数秒毎に撮影**
 2. **TensorFlow Lite による人物・ゴミ検知**
    - 家具や家電などの対象物を検出
