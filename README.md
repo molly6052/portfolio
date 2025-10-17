@@ -54,7 +54,7 @@
 ### ○ 連絡先
 - 📍 Tokyo, Japan  
 - ✉️ mori301.ryukyu@gmail.com  
-- 🐙 [GitHub](https://github.com/molly6052)
+- 📝 [GitHub](https://github.com/molly6052)
 
 ---
 
