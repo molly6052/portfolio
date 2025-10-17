@@ -25,36 +25,38 @@
 
 | 手順 | 処理内容 | 使用モデル・手法 |
 |-----------|-----------|----------------|
-| 1 | 試合映像の抽出・整形 | OpenCV, MoviePy |
-| 2 | 審判の映り込み除去 | LangSAM + XMem + ProPainter |
-| 3 | 選手領域の切り出し | LangSAM（2人検出） |
-| 4 | 姿勢推定 | DeepLabCut（骨格座標の推定） |
-| 5 | 骨格系列データ作成・可視化・目視評価 | pyskl（MMAction互換形式） |
-| 6 | 行動認識モデル学習 | MMAction2 (ST-GCN) |
-| 7 | 評価 | Confusion Matrixで性能確認<br>（2 or 3クラス） |
+| 1.データ準備 | 試合映像の抽出・整形 | OpenCV, MoviePy |
+| 2.審判除去 | 審判の映り込み除去 | LangSAM + XMem + ProPainter |
+| 3.選手以外除去 | 選手領域の切り出し | LangSAM（2人検出） |
+| 4.姿勢推定 | 骨格座標の推定 | DeepLabCut（トップダウン型モデル） |
+| 5.骨格データ化 | 骨格系列データ作成・可視化・目視評価 | pyskl（MMAction互換形式） |
+| 6.行動認識 | 行動認識モデル学習 | MMAction2 (ST-GCN) |
+| 7.評価 | 行動認識モデルの学習・テスト評価 | Confusion Matrixで性能確認<br>（2 or 3クラス） |
 
 ---
 
 ## ディレクトリと各スクリプトの役割・依存関係
 
-judo_action_recognition/
-- `01_data_preparation/`
-  - **動画を範囲時間だけカットする.ipynb**：判定時刻から3秒切り出しなど。
-  - **動画向きで分ける.ipynb**：選手の投げられる向きごとに分類し、学習の安定化を工夫。
-  - **動画データセット編集など.ipynb**：動画のラベル付/整理など。
-- `02_inpainting_mask/`
-  - **マスク切り抜き動画.ipynb**：LangSAMで審判マスク生成 → XMemで追跡 → ProPainterで除去。
-- `03_pose_estimation/`
-  - **COLAB_maDLC_TrainNetwork_VideoAnalysis.ipynb**：DeepLabCutの学習/推定テンプレート（Colab前提）。
-- `04_skeleton_dataset/`
-  - **学習データ作成.ipynb**：CSVやフレームから骨格系列用データの準備。
-  - **pysklでmmactionの骨格座標を可視化.ipynb**：PySKLで骨格座標の可視化・目視評価。
-- `05_training_eval/`
-  - **mmaction_skeleton_based_dataset作成_学習_テストも含む.ipynb**：MMAction2ベースのデータ作成→学習→推論。
-  - **柔道_学習_11月23日提出用.ipynb**：最終提出用の実験一式（2/3クラス設定の比較など）。
 
-**依存関係（概略）**  
-`01_data_ops` → `02_inpainting_mask` → `03_pose_estimation` → `04_skeleton_dataset` → `05_training_eval`
+judo_action_recognition/
+├── 01_data_preparation/
+│   ├── 動画を範囲時間だけカットする.ipynb     # 判定時刻から3秒間を切り出す処理。
+│   ├── 動画向きで分ける.ipynb                 # 選手の向き（投げ方向）ごとに分類し、学習データを安定化。
+│   └── 動画データセット編集など.ipynb          # 各動画へのラベル付与、分割、整理などの前処理。
+│
+├── 02_inpainting_mask/
+│   └── マスク切り抜き動画.ipynb               # LangSAMで審判領域を検出 → XMemで追跡 → ProPainterで除去。
+│
+├── 03_pose_estimation/
+│   └── COLAB_maDLC_TrainNetwork_VideoAnalysis.ipynb  # DeepLabCutを用いた姿勢推定テンプレート（Google Colab対応）。
+│
+├── 04_skeleton_dataset/
+│   ├── 学習データ作成.ipynb                   # 姿勢推定結果（CSV/フレーム）から骨格系列データを生成。
+│   └── pysklでmmactionの骨格座標を可視化.ipynb  # PySKLを使って骨格座標の時系列を可視化し、動作を目視評価。
+│
+├── 05_training_eval/
+│   ├── mmaction_skeleton_based_dataset作成_学習_テストも含む.ipynb  # MMAction2で学習・推論・評価までを実施。
+    └── 柔道_学習_11月23日提出用.ipynb          # 最終提出用（2クラス/3クラス比較実験含む）。
 
 ---
 
