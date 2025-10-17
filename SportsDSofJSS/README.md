@@ -37,26 +37,23 @@
 
 ## ディレクトリと各スクリプトの役割・依存関係
 
-
-judo_action_recognition/
-├── 01_data_preparation/
-│   ├── 動画を範囲時間だけカットする.ipynb     # 判定時刻から3秒間を切り出す処理。
-│   ├── 動画向きで分ける.ipynb                 # 選手の向き（投げ方向）ごとに分類し、学習データを安定化。
-│   └── 動画データセット編集など.ipynb          # 各動画へのラベル付与、分割、整理などの前処理。
-│
-├── 02_inpainting_mask/
-│   └── マスク切り抜き動画.ipynb               # LangSAMで審判領域を検出 → XMemで追跡 → ProPainterで除去。
-│
-├── 03_pose_estimation/
-│   └── COLAB_maDLC_TrainNetwork_VideoAnalysis.ipynb  # DeepLabCutを用いた姿勢推定テンプレート（Google Colab対応）。
-│
-├── 04_skeleton_dataset/
-│   ├── 学習データ作成.ipynb                   # 姿勢推定結果（CSV/フレーム）から骨格系列データを生成。
-│   └── pysklでmmactionの骨格座標を可視化.ipynb  # PySKLを使って骨格座標の時系列を可視化し、動作を目視評価。
-│
-├── 05_training_eval/
-│   ├── mmaction_skeleton_based_dataset作成_学習_テストも含む.ipynb  # MMAction2で学習・推論・評価までを実施。
-    └── 柔道_学習_11月23日提出用.ipynb          # 最終提出用（2クラス/3クラス比較実験含む）。
+judo-ippon-var/
+├── preprocessing/                      # 前処理（トリミング/審判除去/向き分け/編集）
+│   ├── 動画を範囲時間だけカットする.ipynb         # FFmpegで判定時刻から3秒間を切り出す処理
+│   ├── マスク切り抜き動画.ipynb                   # LangSAMで審判領域を検出 → XMemで追跡 → ProPainterで除去
+│   ├── 動画向きで分ける.ipynb                     # 選手の向き（投げ方向）ごとに分類し、学習を安定化
+│   └── 動画データセット編集など.ipynb             # 各動画へのラベル付与、分割、整理などの前処理
+├── dataset/                            # データセット生成（骨格/メタ）
+│   └── 学習データ作成.ipynb                      # 姿勢推定結果（CSV/フレーム）から骨格座標データ（Skeletonベース）を生成
+├── training/                           # 学習・評価
+│   ├── mmaction_skeleton_based_dataset作成_学習_テストも含む.ipynb  #  MMAction2で学習・推論・評価までを実施
+│   └── **柔道_学習_1月3日_ipynb.ipynb**                            # 学習（2クラス/3クラス比較）/混同行列/CSV出力
+├── visualization/                      # 可視化
+│   └── pysklでmmactionの骨格座標を可視化.ipynb    # 骨格座標を可視化し、姿勢推定結果を目視評価
+├── docs/                               # 研究資料（背景・結果）
+│   ├── SDSC2023[口頭・入賞]柔道.pdf
+│   └── スポコン_Judo_2023.pdf
+└── README.md
 
 ---
 
@@ -100,4 +97,5 @@ judo_action_recognition/
 * DeepLabCut: [https://github.com/DeepLabCut/maDLC_NatureMethods2022](https://github.com/DeepLabCut/maDLC_NatureMethods2022)
 * MMAction2: [https://github.com/open-mmlab/mmaction2](https://github.com/open-mmlab/mmaction2)
 
-> <br>※ 研究背景・手法・結果の詳細は `00_docs/スポコン_Judo_2023.pdf` および `SDSC2023[口頭・入賞]柔道.pdf` を参照してください。  
+<br>
+> ※ 研究背景・手法・結果の詳細は `00_docs/スポコン_Judo_2023.pdf` および `SDSC2023[口頭・入賞]柔道.pdf` を参照してください。  
