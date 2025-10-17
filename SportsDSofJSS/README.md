@@ -3,7 +3,12 @@
 本リポジトリは、柔道試合動画の「試合終了直前3秒」から、**「一本」** か **「技あり」** か **「時間切れ」** かを行動認識モデルにて分類する手法を開発した際のPythonコードを、当時の実装に基づいて整理・公開したものです。
 
 本研究は、2023年スポーツデータサイエンスコンペティション（柔道部門）にて発表されました。
-<br>（詳細は `00_docs/スポコン_Judo_2023.pdf` および 'SDSC2023[口頭・入賞]柔道.pdf' を参照）
+<br>（詳細は `00_docs/スポコン_Judo_2023.pdf` および `SDSC2023[口頭・入賞]柔道.pdf` を参照）
+
+私は主に、Linuxサーバー上での環境構築や、学習済みモデルの選定・実装・評価を担当しました。
+工夫した点としては、本研究では複数のモデルを使用しており、モデルごとに依存関係やライブラリのバージョンが異なっていました。そのため、仮想環境を構築する際には、CUDAや各種ライブラリのバージョン整合性を意識し、できるだけ少ない環境で一連の処理が完結するように構築しました。
+
+また、柔道試合は様々な向きに選手が倒れるため、学習に使う動画を「右・左・前・後」に場合分けし、学習の安定化のため工夫しました。
 
 **注意： コンペ提供データは、本リポジトリに含めません。**
 
@@ -32,7 +37,8 @@
 
 ## ディレクトリと各スクリプトの役割・依存関係
 
-- `01_data_ops/`
+judo_action_recognition/
+- `01_data_preparation/`
   - **動画を範囲時間だけカットする.ipynb**：判定時刻から3秒切り出しなど。
   - **動画向きで分ける.ipynb**：選手の投げられる向きごとに分類し、学習の安定化を工夫。
   - **動画データセット編集など.ipynb**：動画のラベル付/整理など。
@@ -67,11 +73,11 @@
 > ※ 本リポジトリは**データ非公開で再現性**はありません。以下は**参考**としての環境メモです。
 
 - OS: Google Colab / Linuxサーバー
-- Python: 3.9–3.10 目安
+- Python: 3.9
 - 主要ライブラリ
   - OpenMMLab: `mmcv`, `mmengine`, `mmaction2`, `mmpose`, `mmdet`
   - DeepLabCut 2.2+
-  - PyTorch
+  - PyTorch >=1.8
   - 画像/動画：`opencv-python`, `ffmpeg`
   - 可視化/解析：`numpy`, `pandas`, `matplotlib`
   - 前処理：LangSAM, XMem, ProPainter
@@ -92,4 +98,4 @@
 * DeepLabCut: [https://github.com/DeepLabCut/maDLC_NatureMethods2022](https://github.com/DeepLabCut/maDLC_NatureMethods2022)
 * MMAction2: [https://github.com/open-mmlab/mmaction2](https://github.com/open-mmlab/mmaction2)
 
-<br>研究背景・手法・結果の詳細は `00_docs/スポコン_Judo_2023.pdf` および 'SDSC2023[口頭・入賞]柔道.pdf' を参照してください。  
+<br>研究背景・手法・結果の詳細は `00_docs/スポコン_Judo_2023.pdf` および `SDSC2023[口頭・入賞]柔道.pdf` を参照してください。  
