@@ -49,6 +49,11 @@
 | 内股一本 vs 時間切れ（2クラス）        | **93.75%** | 高精度で分類成功     |
 | 内股一本 vs 技あり vs 時間切れ（3クラス） | **63.8%**  | 一本・技ありの境界が課題 |
 
+**混同行列**  
+| ２クラス | ３クラス |
+|--------|-------|
+| <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixTwoClass.png" width="300"> | <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixThreeClass.png" width="360"> |
+
 > - 3秒＝**約73フレーム**を入力系列とし、内股一本 vs 時間切れの2クラス、または内股一本/技あり/時間切れの3クラスを分類。
 > - PDFの説明では、2クラスで **正答率 ≈ 93.75%**（32の動画でテスト）。今後は3クラス精度の改善が課題。  
 
@@ -62,7 +67,7 @@
   - PyTorch >=1.8
   - 画像/動画：`opencv-python`, `ffmpeg`
   - 可視化/解析：`numpy`, `pandas`, `matplotlib`
-  - 前処理：LangSAM, XMem, ProPainter
+  - 前処理：`LangSAM`, `XMem`, `ProPainter`
 
 > ※ 本リポジトリは**データ非公開で再現性**はありません。以下は**参考**としての環境メモです。
 
@@ -80,7 +85,6 @@
 * XMem: [https://github.com/hkchengrex/XMem](https://github.com/hkchengrex/XMem)
 * ProPainter: [https://github.com/sczhou/ProPainter](https://github.com/sczhou/ProPainter)
 * DeepLabCut: [https://github.com/DeepLabCut/maDLC_NatureMethods2022](https://github.com/DeepLabCut/maDLC_NatureMethods2022)
-* MMAction2: [https://github.com/open-mmlab/mmaction2](https://github.com/open-mmlab/mmaction2)
+* MMAction2: [https://github.com/open-mmlab/mmaction2](https://github.com/open-mmlab/mmaction2)<br>
 
-<br>
 > ※ 研究背景・手法・結果の詳細は `00_docs/スポコン_Judo_2023.pdf` および `SDSC2023[口頭・入賞]柔道.pdf` を参照してください。  
