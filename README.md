@@ -53,7 +53,7 @@
 ##### 体験はこちら → https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
 ---
 
-#### [柔道の試合において「一本」の瞬間を自動判定する VAR（ビデオ・アシスタント・レフェリー）システム](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/SportsDSofJSS)
+#### [柔道の試合において「一本」の瞬間を自動判定する VAR（ビデオ・アシスタント・レフェリー）システム](https://github.com/molly6052/portfolio/tree/main/JudoIpponVar)
 - **技術:** Python, PyTorch, OpenCV, DeepLabCut, 行動認識, 姿勢推定, インスタンスセグメンテーション, 物体追従, 画像修復
 - **役割** データセット構築・モデル学習・推論処理
 - **成果** 柔道特有の姿勢データを追加学習し、1本判定の3クラス分類で約63％の精度を達成
