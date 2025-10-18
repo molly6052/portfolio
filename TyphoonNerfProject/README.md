@@ -16,6 +16,10 @@
 * Instant-NGPをGPU環境で動作させる際に、**CUDAおよびライブラリのバージョン整合性を最適化**し、学習を高速化。
 * 点群処理ではCloudCompareを活用し、**衛星データ（JAXAひまわり）との高度比較を自動化**。
 
+**Instant-NGPでVR化した台風**
+
+![台風VR化](images/TyphoonVR.gif)
+
 **補足:**
 
 > **観測映像・航空機データ自体は、本リポジトリに含めません。**
@@ -57,9 +61,9 @@
 | 雲頂高度（Instant-NGP再構成） | **±100 m以内** | JAXAひまわり雲頂高度との比較で高精度一致 |
 | 雄大雲（積乱雲上層構造）         | **融解層高度と同等** | ドロップゾンデ観測値（RH=100%）と一致 |
 
-**比較図**
+**NeRF再構成結果**
 
-| NeRF再構成結果                                              | CloudCompare測量結果                                            |
+| Reconstruction                                              | CloudCompare測量結果                                            |
 | ------------------------------------------------------ | ----------------------------------------------------------- |
 | <img src="images/nerf_reconstruction.png" width="320"> | <img src="images/cloudcompare_measurement.png" width="360"> |
 
