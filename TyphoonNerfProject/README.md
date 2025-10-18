@@ -1,4 +1,4 @@
-<img width="811" height="84" alt="image" src="https://github.com/user-attachments/assets/27bef2dc-c8cd-4c36-8339-3dd3a058e41d" /># 神経放射輝度場を用いた台風航空機観測映像からの壁雲3Dモデリングおよび高度測量
+# 神経放射輝度場を用いた台風航空機観測映像からの壁雲3Dモデリングおよび高度測量
 
 本研究は、琉球大学大学院 理工学研究科 知能機械システムプログラムにおける修士論文研究として2024年3月に発表されました。
 
@@ -95,13 +95,11 @@ Fig.3 COLMAP点群とNeRF点群のカメラ座標で位置合わせ
 
 4. Mindulle (2021) の壁雲の雲頂高度を測量
 
-| 点群測量箇所                                            | 点群測量結果                                            |
+| 雲頂高度測量箇所                                            | 雲頂高度測量結果                                            |
 | ------------------------------------------------------ | ----------------------------------------------------------- |
-| ![位置合わせ前画像](images/BeforeAclignmentPointCloud.png) | ![位置合わせ後画像](images/AfterAclignmentPointCloud.png) |
+| ![雲頂高度測量箇所](images/CloudTopPointCloud.png) | ![雲頂高度測量結果](images/CloudTopPointCloudResult.png) |
 
 Fig.4 ピンク色の点を赤い矢印の向きに10点選択して雲頂を測量した平均結果.
-2
-度は 16,238 m となった
 
 ## ○ 結果
 
