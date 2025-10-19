@@ -40,7 +40,7 @@
 
 ## ○ 制作物ポートフォリオ 一覧
 
-#### [YOLOv12モデルを用いた物体検出アプリ（2025年度）](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/ObjectDetectionApp)
+#### 1. [YOLOv12モデルを用いた物体検出アプリ（2025年度）](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/ObjectDetectionApp)
 - **目的:** 最新の物体検出モデルを専門知識なしで体験できる環境を提供
 - **アプローチ:** YOLOv12による物体検出アプリを開発し、StreamlitでUIを構築
 - **成果:** ブラウザ上で誰でも最新のAIモデルを簡単に利用可能
@@ -49,7 +49,7 @@
 
 ---
 
-#### [【修士論文】神経放射輝度場を用いた台風航空機観測の映像からの目の壁雲の 3D モデリングおよび高度測量(2023年度)](https://github.com/molly6052/portfolio/tree/main/TyphoonNerfProject)
+#### 2. [【修士論文】神経放射輝度場を用いた台風航空機観測の映像からの目の壁雲の 3D モデリングおよび高度測量(2023年度)](https://github.com/molly6052/portfolio/tree/main/TyphoonNerfProject)
 - **目的:** 航空機観測映像から台風の内部構造を立体再現し、雲頂高度と段層構造の雲を測量  
 - **アプローチ:** 画像処理＋深層学習モデルによる3Dモデリングと点群処理ソフトを組み合わせて解析  
 - **成果:** 測量結果がJAXAの雲頂高度データとほぼ一致し、信頼性を確認
@@ -57,14 +57,14 @@
 
 ---
 
-#### [行動認識モデルを用いた柔道試合動画からの一本判定（2023年度）](https://github.com/molly6052/portfolio/tree/main/JudoIpponVar)
+#### 3. [行動認識モデルを用いた柔道試合動画からの一本判定（2023年度）](https://github.com/molly6052/portfolio/tree/main/JudoIpponVar)
 - **目的:** 審判でも判定が難しい「一本」判定をAIで補助
 - **アプローチ:** 姿勢推定＋行動認識モデルを構築し、独自データで追加学習
 - **成果:** 3クラス分類（内股の一本・技あり・時間切れ）で63%の精度を達成
 
 ---
 
-#### [校内の不法投棄をリアルタイム検出する簡易システム（2022年度）](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/CampusDumpDetection)
+#### 4. [校内の不法投棄をリアルタイム検出する簡易システム（2022年度）](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/CampusDumpDetection)
 - **目的:** 夜間の構内で発生する不法投棄を低コストで自動検知 
 - **アプローチ:** Raspberry Pi + 物体検出モデルを組み合わせ、リアルタイム検出を実装  
 - **成果:** 約2万円の安価な構成で夜間映像の物体検出を実現（実証実験済み）
