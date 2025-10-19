@@ -181,27 +181,3 @@ Fig.7 融解層（RH=100%、気温0℃）付近でCongestus層と一致。写真
 - COLMAP: [https://colmap.github.io/](https://colmap.github.io/)  
 
 > ※ 研究背景・手法・結果の詳細は `docs/修士論文_盛拓矢.pdf` を参照してください。
-
----
-
-## ○ フォルダ構成
-
-```
-typhoon_nerf_project/
-├── preprocessing/
-│   ├── 2点1と2点3の前処理.ipynb
-│   └── 2点2の画像の前処理と2点3のカメラ座標推定.ipynb
-├── modeling/
-│   ├── 2点4のInstantNGPの学習.ipynb
-│   ├── 2点5の点群作成.ipynb
-│   └── 2点6のCloudCompareを用いた点群測量.ipynb
-├── scripts/
-│   ├── colmap2nerf2.py
-│   └── run2.py
-├── data/
-│   ├── base_cam.json
-│   └── transforms.json
-├── docs/
-│   └── 修士論文_盛拓矢.pdf
-└── README.md
-```
