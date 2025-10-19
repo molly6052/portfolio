@@ -1,0 +1,11 @@
+Final RMS: 0.462719
+----------------
+Transformation matrix
+0.160	-0.636	0.546	-2275948.000
+0.546	0.501	0.423	3213091.500
+-0.636	0.269	0.501	-2453622.000
+0.000	0.000	0.000	1.000
+----------------
+Scale: 0.853241 (already integrated in above matrix!)
+----------------
+Refer to Console (F8) for more details
