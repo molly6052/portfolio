@@ -40,7 +40,7 @@
 
 ## ○ 制作物ポートフォリオ 一覧
 
-#### [YOLOv12モデルを用いた物体検出アプリ（2025）](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/ObjectDetectionApp)
+#### [YOLOv12モデルを用いた物体検出アプリ（2025年度）](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/ObjectDetectionApp)
 - **目的:** 最新の物体検出モデルを専門知識なしで体験できる環境を提供
 - **アプローチ:** YOLOv12による物体検出アプリを開発し、StreamlitでUIを構築
 - **成果:** ブラウザ上で誰でも最新のAIモデルを簡単に利用可能
