@@ -1,30 +1,87 @@
 # 行動認識モデルを用いた柔道試合動画からの一本判定
 
-本研究は、2023年スポーツデータサイエンスコンペティション（柔道部門）にて発表されました。
-<br>（詳細は `docs/スポコン_Judo_2023.pdf` および `docs/SDSC2023[口頭・入賞]柔道.pdf` を参照）
+**2023年度スポーツデータサイエンスコンペティション（柔道部門）** にて発表・入賞しました。 <br>（詳細は `docs/スポコン_Judo_2023.pdf` および `docs/SDSC2023[口頭・入賞]柔道.pdf` を参照）
+
+---
 
 ## ○ 概要
-本リポジトリは、柔道試合動画の「投技判定前の3秒間(時間切れは、試合終了直前の3秒間)」から、**「一本」** か **「技あり」** か **「時間切れ」** かを行動認識モデルにて分類する手法を開発した際のPythonコードを、当時の実装に基づいて整理・公開したものです。
 
-主に私はLinuxサーバー上での環境構築や、学習済みモデルの選定・実装・評価を担当しました。
+本研究では、柔道試合映像の「判定直前3秒間」から、
+**「一本」**・**「技あり」**・**「時間切れ」** を行動認識モデルを用いて分類する手法を開発しました。
 
-工夫した点としては、本研究では複数のモデルを使用しており、モデルごとに依存関係やライブラリのバージョンが異なっていました。そのため、仮想環境を構築する際には、CUDAや各種ライブラリのバージョン整合性を意識し、できるだけ少ない環境で一連の処理が完結するように構築しました。
+審判を映像から除去し、選手の動作のみを解析することで、
+俯瞰視点（映像）で審判を補助する「VAR（Video Assistant Referee）」システムの実現を目指しました。
 
-また、柔道試合は様々な向きに選手が倒れるため、学習に使う動画を「右・左・前・後」に場合分けし、学習の安定化のため工夫しました。
+コンペには4人チームで参加し、主に私はLinuxサーバー上での環境構築や、学習済みモデルの選定・実装・評価を担当しました。
 
-**補足:**
-> **コンペ提供データ自体は、本リポジトリに含めません。**
+| 項目    | 内容                             |
+| ----- | ------------------------------ |
+| 対象競技  | 柔道（内股の一本判定）                    |
+| 使用データ | 世界大会2018–2021年試合映像（計144本）      |
+| 入力映像  | 試合終了直前の3秒間（約73フレーム）            |
+| 主な使用モデル | DeepLabCut + MMAction2（ST-GCN） |
+| 評価結果（2クラス）  | 一本 vs 時間切れ分類 精度 **93.75%**     |
+| 評価結果（3クラス）  | 一本 vs 技あり vs 時間切れ分類 精度 **63.80%%**     |
+| 発表    | スポーツデータサイエンスコンペティション2023 柔道部門  |
 
 ---
 
 ## ○ 背景・目的
-- VAR（Video Assistant Referee）の発想を柔道に適用し、**俯瞰視点（映像）で審判を補助**する仕組みを目指しました。  
-- シドニー五輪柔道男子 100kg 超級決勝で起きた誤審判定問題もあり、**選手の背中の付き方・速度・強さ**等の定性的基準を定量化する動機があります。
-- 手法は **審判の映り込み除去 → 選手のみ抽出 → 姿勢推定（骨格座標の取得） → 行動認識** の流れです。
-  
+
+柔道における「一本」判定は、以下のような定性的な基準に基づいて行われます。
+
+| 一本の4条件        | 内容           |
+| ------------- | ------------ |
+| ① 相手を制していること  | 攻撃側が明確に優位である |
+| ② 背が畳に付いていること | 背部の接地を確認     |
+| ③ 強さがあること     | 投げの勢い・パワー    |
+| ④ 速さがあること     | 投げのスピード・瞬発性  |
+
+しかし、これらは熟練審判の感覚に依存しており、誤審の原因にもなっています。
+→ **AIによる映像解析で、定量的に「一本」を補助判定できる仕組み**を提案しました。
+
 ---
 
-## ○ 分析フロー
+## ○ 提案手法の全体像
+
+| ステップ      | 処理内容                                | 使用技術                        |
+| --------- | ----------------------------------- | --------------------------- |
+| ① 審判検出・除去 | LangSAMで審判を検出、XMemで追跡、ProPainterで削除 | LangSAM / XMem / ProPainter |
+| ② 選手領域抽出  | 「青・白の道着を着た人物」をテキスト指定で抽出             | LangSAM                     |
+| ③ 姿勢推定    | DeepLabCutによる骨格座標の推定                 | DeepLabCut                  |
+| ④ 骨格系列作成  | PySKLでMMAction2互換フォーマット化・可視化・目視評価            | PySKL                       |
+| ⑤ 行動認識    | MMAction2（ST-GCN）で学習・判定          | MMAction2                   |
+| ⑥ 評価      | Confusion Matrixによる精度・再現率評価（2 or 3クラス）         | scikit-learn                |
+
+---
+
+### ■ 処理フロー概要
+
+| 元映像                                  | 審判除去                                  | 姿勢推定                               | 行動認識                                    |
+| ------------------------------------ | ------------------------------------- | ---------------------------------- | --------------------------------------- |
+| ![original](images/OriginalJudo.png) | ![mask](images/InpaintingReferee.png) | ![pose](images/PoseEstimation.png) | ![action](images/ActionRecognition.png) |
+
+*Fig.1: 試合映像から一本判定までの一連のAI処理フロー*
+
+---
+
+## ○ システム構成
+
+### **環境構築図**
+
+| 処理段階  | 使用環境                      | 備考                  |
+| ----- | ------------------------- | ------------------- |
+| データ整形 | Google Colab / Python 3.9 | OpenCV + MoviePy    |
+| モデル学習 | Linux GPUサーバ（NVIDIA RTX 4080）   | PyTorch + MMAction2 |
+| 姿勢推定  | DeepLabCut (Colab用)       | Colab GPU利用         |
+| 骨格可視化 | PySKL + matplotlib        | 結果確認・検証用            |
+
+![Flow](images/PreprocessingFlow.png)
+*Fig.2: 開発・学習・評価までのワークフロー*
+
+---
+
+## ○ 分析フロー（詳細）
 
 | 手順 | 処理内容 | 使用モデル・手法 |
 |-----------|-----------|----------------|
@@ -39,54 +96,96 @@
 
 ---
 
-![手順](images/PreprocessingFlow.png)
-
-
----
-
 ## ○ 結果
 
-| 判定分類                      | 正答率        | 備考           |
-| ------------------------- | ---------- | ------------ |
-| 内股一本 vs 時間切れ（2クラス）        | **93.75%** | 高精度で分類成功     |
-| 内股一本 vs 技あり vs 時間切れ（3クラス） | **63.8%**  | 一本・技ありの境界が課題 |
+| 判定分類                    | 正答率        | 備考       |
+| ----------------------- | ---------- | -------- |
+| 一本 vs 時間切れ（2クラス）        | **93.75%** | 高精度で分類成功 |
+| 一本 vs 技あり vs 時間切れ（3クラス） | **63.8%**  | 一本・技ありの境界が課題  |
 
-**混同行列**  
-| ２クラス | ３クラス |
-|--------|-------|
-| <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixTwoClass.png" width="300"> | <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixThreeClass.png" width="360"> |
+### **混同行列**
 
-> - 3秒＝**約73フレーム**を入力系列とし、内股一本 vs 時間切れの2クラス、または内股一本/技あり/時間切れの3クラスを分類。
-> - 2クラスで **正答率 ≈ 93.75%**（32の動画でテスト）。今後は3クラス精度の改善が課題。  
+| 2クラス分類                                          | 3クラス分類                                              |
+| ----------------------------------------------- | --------------------------------------------------- |
+| ![TwoClass](images/ConfusionMatrixTwoClass.png) | ![ThreeClass](images/ConfusionMatrixThreeClass.png) |
 
-## ○ 実行環境（参考メモ）
+*Fig.3: 一本/時間切れ・技あり分類の比較結果*
 
-- OS: Google Colab / Linuxサーバー
-- Python: 3.9
-- 主要ライブラリ
-  - OpenMMLab: `mmcv`, `mmengine`, `mmaction2`, `mmpose`, `mmdet`
-  - DeepLabCut 2.2+
-  - PyTorch >=1.8
-  - 画像/動画：`opencv-python`, `ffmpeg`
-  - 可視化/解析：`numpy`, `pandas`, `matplotlib`
-  - 前処理：`LangSAM`, `XMem`, `ProPainter`
-
-> ※ 本リポジトリは**データ非公開で再現性**はありません。上記は**参考**としての環境メモです。
+> 一本・時間切れの2分類ではほぼ誤判定なし。
+> 技ありを含む3クラス分類では「一本・技あり」間で混同が発生。
 
 ---
 
-## ○ 今後の改善点
-- [ ] **姿勢推定精度の向上**：選手の重なりによる見え隠れを改善する、学習データを増やす
-- [ ] **3クラス分類の精度改善**：様々な画角の動画で学習する、学習データ数を増やす
+## ○ 考察
+
+1. **成功例（高精度分類）**
+
+   * 両選手が明瞭に映り、姿勢推定結果が安定。
+
+2. **失敗例（誤分類）**
+
+   * カメラ角度が低く、背中の接地が判定しづらい。
+   * 学習データを増やしたり、カメラを二つ用意したり、対処できるか検討
+
+| 当てられた一本                         | 当てられなかった一本                    |
+| ------------------------------- | ----------------------------- |
+| ![hit](images/CorrectIppon.png) | ![miss](images/MissIppon.png) |
+
+*Fig.4: 判定の成否例（カメラ角度・明瞭度の影響）*
+
+---
+
+## ○ 今後の展望
+
+| 課題           | 改善方針                           |
+| ------------ | ------------------------------ |
+| 3クラス分類の精度改善 | 複数のカメラ視点を学習、追加学習のデータ量を増やす               |
+| 姿勢推定の精度向上    | 選手の重なりによる見え隠れを改善する、学習データを増やす　　　　　　|
+
+---
+
+## ○ 実行環境
+
+| 項目     | バージョン / 内容                |
+| ------ | ------------------------- |
+| OS     | Linux / Google Colab      |
+| Python | 3.9                       |
+| 深層学習環境 | PyTorch 1.8+   |
+| 骨格可視化  | PySKL, Matplotlib         |
+| 前処理   | OpenCV, MoviePy           |
+| 機械学習による前処理  | LangSAM, XMem, ProPainter |
+| 姿勢推定   | DeepLabCut                |
+| 行動認識   | MMAction2           |
+
+> ※ 学習データはスポーツデータサイエンスコンペティション提供のため非公開。
 
 ---
 
 ## ○ 引用・参考文献
-* 陸 煒・盛 拓矢・北島 栄司・宮田 龍太（2023）「行動認識モデルを用いた柔道試合動画からの一本判定」スポーツデータサイエンスコンペティション2023
-* Language segment-anythin: [https://github.com/luca-medeiros/lang-segment-anything](https://github.com/luca-medeiros/lang-segment-anything)
-* XMem: [https://github.com/hkchengrex/XMem](https://github.com/hkchengrex/XMem)
-* ProPainter: [https://github.com/sczhou/ProPainter](https://github.com/sczhou/ProPainter)
-* DeepLabCut: [https://github.com/DeepLabCut/maDLC_NatureMethods2022](https://github.com/DeepLabCut/maDLC_NatureMethods2022)
-* MMAction2: [https://github.com/open-mmlab/mmaction2](https://github.com/open-mmlab/mmaction2)<br>
 
-> ※ 研究背景・手法・結果の詳細は `00_docs/スポコン_Judo_2023.pdf` および `SDSC2023[口頭・入賞]柔道.pdf` を参照してください。  
+* 陸 煒・盛 拓矢・北島 栄司・宮田 龍太（2023）
+  「行動認識モデルを用いた柔道試合動画からの一本判定」
+  *スポーツデータサイエンスコンペティション2023（柔道部門）*
+
+* Lang-Segment-Anything: [https://github.com/luca-medeiros/lang-segment-anything](https://github.com/luca-medeiros/lang-segment-anything)
+
+* XMem: [https://github.com/hkchengrex/XMem](https://github.com/hkchengrex/XMem)
+
+* ProPainter: [https://github.com/sczhou/ProPainter](https://github.com/sczhou/ProPainter)
+
+* DeepLabCut: [https://github.com/DeepLabCut/maDLC_NatureMethods2022](https://github.com/DeepLabCut/maDLC_NatureMethods2022)
+
+* MMAction2: [https://github.com/open-mmlab/mmaction2](https://github.com/open-mmlab/mmaction2)
+
+> 詳細な分析手法・発表スライドは `/docs/スポコン_Judo_2023.pdf` および `/docs/SDSC2023[口頭・入賞]柔道.pdf` を参照。
+
+---
+
+## ○ 発表実績
+
+* **スポーツデータサイエンスコンペティション2023（柔道部門 入賞）**
+* **口頭発表日:** 2024年1月6日（オンライン審査）
+* **発表資料:**
+
+  * `docs/スポコン_Judo_2023.pdf`
+  * `docs/SDSC2023[口頭・入賞]柔道.pdf`
