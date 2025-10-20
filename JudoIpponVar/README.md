@@ -37,51 +37,12 @@
 | ③ 強さがあること     | 投げの勢い・パワー    |
 | ④ 速さがあること     | 投げのスピード・瞬発性  |
 
-しかし、これらは熟練審判の感覚に依存しており、誤審の原因にもなっています。
+これらは熟練審判の感覚に依存しており、誤審の原因にもなっています。
 <br>**AIによる映像解析で、定量的に「一本」を補助判定できる仕組み**を提案しました。
 
 ---
 
-## ○ 提案手法の全体像
-
-| ステップ      | 処理内容                                | 使用技術                        |
-| --------- | ----------------------------------- | --------------------------- |
-| ① 審判検出・除去 | LangSAMで審判を検出、XMemで追跡、ProPainterで削除 | LangSAM / XMem / ProPainter |
-| ② 選手領域抽出  | 「青・白の道着を着た人物」をテキスト指定で抽出             | LangSAM                     |
-| ③ 姿勢推定    | DeepLabCutによる骨格座標の推定                 | DeepLabCut                  |
-| ④ 骨格系列作成  | PySKLでMMAction2互換フォーマット化・可視化・目視評価            | PySKL                       |
-| ⑤ 行動認識    | MMAction2（ST-GCN）で学習・判定          | MMAction2                   |
-| ⑥ 評価      | Confusion Matrixによる精度・再現率評価（2 or 3クラス）         | scikit-learn                |
-
----
-
-### ■ 処理フロー概要
-
-| 元映像                                  | 審判除去                                  | 姿勢推定                               | 行動認識                                    |
-| ------------------------------------ | ------------------------------------- | ---------------------------------- | --------------------------------------- |
-| ![original](images/OriginalJudo.png) | ![mask](images/InpaintingReferee.png) | ![pose](images/PoseEstimation.png) | ![action](images/ActionRecognition.png) |
-
-*Fig.1: 試合映像から一本判定までの一連のAI処理フロー*
-
----
-
-## ○ システム構成
-
-### **環境構築図**
-
-| 処理段階  | 使用環境                      | 備考                  |
-| ----- | ------------------------- | ------------------- |
-| データ整形 | Google Colab / Python 3.9 | OpenCV + MoviePy    |
-| モデル学習 | Linux GPUサーバ（NVIDIA RTX 4080）   | PyTorch + MMAction2 |
-| 姿勢推定  | DeepLabCut (Colab用)       | Colab GPU利用         |
-| 骨格可視化 | PySKL + matplotlib        | 結果確認・検証用            |
-
-![Flow](images/PreprocessingFlow.png)
-*Fig.2: 開発・学習・評価までのワークフロー*
-
----
-
-## ○ 分析フロー（詳細）
+## ○ 分析フロー
 
 | 手順 | 処理内容 | 使用モデル・手法 |
 |-----------|-----------|----------------|
@@ -93,6 +54,9 @@
 | 4.2.骨格データ化 | 骨格座標（Skeletonベース）作成・可視化・目視評価 | Pyskl（MMAction互換形式） |
 | 5.行動認識 | 行動認識モデル学習 | MMAction2 (ST-GCN) |
 | 評価 | 行動認識モデルの学習・テスト評価 | Confusion Matrixで性能確認<br>（2 or 3クラス） |
+
+![Flow](images/PreprocessingFlow.png)
+*Fig.2: 開発・学習・評価までのワークフロー*
 
 ---
 
@@ -107,7 +71,7 @@
 
 | 2クラス分類                                          | 3クラス分類                                              |
 | ----------------------------------------------- | --------------------------------------------------- |
-| ![TwoClass](images/ConfusionMatrixTwoClass.png) | ![ThreeClass](images/ConfusionMatrixThreeClass.png) |
+| <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixTwoClass.png" width="300px"> | <img src="https://github.com/molly6052/portfolio/blob/main/JudoIpponVar/images/ConfusionMatrixThreeClass.png" width="360px"> |
 
 *Fig.3: 一本/時間切れ・技あり分類の比較結果*
 
@@ -127,9 +91,9 @@
    * カメラ角度が低く、背中の接地が判定しづらい。
    * 学習データを増やしたり、カメラを二つ用意したり、対処できるか検討
 
-| 当てられた一本                         | 当てられなかった一本                    |
-| ------------------------------- | ----------------------------- |
-| ![hit](images/CorrectIppon.png) | ![miss](images/MissIppon.png) |
+| 当てられた一本 | 当てられなかった一本 | 当てられなかった時間切れ |
+|----------------|----------------------|---------------------------|
+| ![hit](images/CorrectIppon.png) | ![miss](images/MissIppon.png) | ![miss](images/MissTimeout.png) |
 
 *Fig.4: 判定の成否例（カメラ角度・明瞭度の影響）*
 
@@ -148,13 +112,14 @@
 
 | 項目     | バージョン / 内容                |
 | ------ | ------------------------- |
-| OS     | Linux / Google Colab      |
+| OS     | Linux      |
+| GPU | NVIDIA RTX 4080                       |
 | Python | 3.9                       |
 | 深層学習環境 | PyTorch 1.8+   |
 | 骨格可視化  | PySKL, Matplotlib         |
 | 前処理   | OpenCV, MoviePy           |
 | 機械学習による前処理  | LangSAM, XMem, ProPainter |
-| 姿勢推定   | DeepLabCut                |
+| 姿勢推定   | DeepLabCut 2.2+                |
 | 行動認識   | MMAction2           |
 
 > ※ 学習データはスポーツデータサイエンスコンペティション提供のため非公開。
