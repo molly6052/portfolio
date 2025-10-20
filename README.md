@@ -64,7 +64,7 @@
 
 ---
 
-#### 4. [校内の不法投棄をリアルタイム検出する簡易システム（2022年度）](https://github.com/molly6052/portfolio/tree/c41c3da2d6d242c6309d120489f3fa30410c3ed6/CampusDumpDetection)
+#### 4. [校内の不法投棄をリアルタイム検出する簡易システム（2022年度）](https://github.com/molly6052/portfolio/tree/main/CampusDumpDetection)
 - **目的:** 夜間の構内で発生する不法投棄を低コストで自動検知 
 - **アプローチ:** Raspberry Pi + 物体検出モデルを組み合わせ、リアルタイム検出を実装  
 - **成果:** 約2万円の安価な構成で夜間映像の物体検出を実現（実証実験済み）
