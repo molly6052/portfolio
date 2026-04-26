@@ -49,8 +49,6 @@ AIエンジニアを目指す未経験者として、自主的に制作した作
 - **アプローチ:** YOLOv12による物体検出アプリを開発し、StreamlitでUIを構築
 - **成果:** ブラウザ上で誰でも最新のAIモデルを簡単に利用可能
 
-##### 体験はこちら → https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
-
 ---
 
 #### 2. [【修士論文】神経放射輝度場を用いた台風航空機観測の映像からの目の壁雲の 3D モデリングおよび高度測量(2023年度)](https://github.com/molly6052/portfolio/tree/main/TyphoonNerfProject)
