@@ -6,6 +6,7 @@
 下記のリンクに本アプリを公開しています。
 
 https://portfolio-nxdksjr5wg8pk28awedfy4.streamlit.app/
+※ 2026年4月26日現在、停止しています。
 
 **補足:**
 > アップロードした画像は保存されません。
